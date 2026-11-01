@@ -37,7 +37,7 @@ def get_initialization_vector() -> bytes:
     return base64.b64encode(os.urandom(IV_LENGTH)).decode("utf-8")
 
 
-def get_encryption_key(password: str, salt_b64: str) -> bytes:
+def get_encryption_key(code: str, salt_b64: str) -> bytes:
     salt = base64.b64decode(salt_b64)
     kdf = PBKDF2HMAC(
         algorithm=hashes.SHA1(),
@@ -47,11 +47,11 @@ def get_encryption_key(password: str, salt_b64: str) -> bytes:
         backend=backend,
     )
 
-    return kdf.derive(password.encode())
+    return kdf.derive(code.encode())
 
 
-def decrypt_data(password: str, salt_b64: str, iv_b64: str, encrypted_data_b64: str | bytes) -> str | None:
-    key = get_encryption_key(password, salt_b64)
+def decrypt_data(code: str, salt_b64: str, iv_b64: str, encrypted_data_b64: str | bytes) -> str | None:
+    key = get_encryption_key(code, salt_b64)
     iv = base64.b64decode(iv_b64)
     ciphertext = base64.b64decode(encrypted_data_b64)
     cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=backend)

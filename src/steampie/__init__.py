@@ -4,7 +4,7 @@ __author__ = "offish"
 __version__ = "1.0.0"
 __license__ = "MIT"
 
-from .mafile import MaFileData, get_mafile_data
+from .mafile import MaFileData, get_mafile_data, is_mafile_unencrypted, get_decrypted_data
 from .exceptions import SteamPieError, EncryptionError
 from .inventory import Inventory
 from .providers import PROVIDERS, Custom, SteamSupply, SteamCommunity, SteamApis
