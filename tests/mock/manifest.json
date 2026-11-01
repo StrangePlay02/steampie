@@ -1,0 +1,17 @@
+{
+    "encrypted": true,
+    "first_run": false,
+    "entries": [
+        {
+            "encryption_iv": "YPs8DOis/dioyGs2yPHSDg==",
+            "encryption_salt": "A/k6x7JZ3j0=",
+            "filename": "76561199023863151.maFile",
+            "steamid": 76561199023863151
+        }
+    ],
+    "periodic_checking": false,
+    "periodic_checking_interval": 5,
+    "periodic_checking_checkall": false,
+    "auto_confirm_market_transactions": false,
+    "auto_confirm_trades": false
+}

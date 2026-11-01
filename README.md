@@ -6,13 +6,11 @@
 [![Discord](https://img.shields.io/discord/467040686982692865?color=7289da&label=Discord&logo=discord)](https://discord.gg/t8nHSvA)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
-`steampie` is a Python library for interacting with Steam, and is a modified fork of [bukson](https://github.com/bukson)'s [steampy](https://github.com/bukson/steampy).
+`steampie` is a Python library with utilities and tools for interacting with Steam.
 
 ## Donate
-* BTC: `bc1qntlxs7v76j0zpgkwm62f6z0spsvyezhcmsp0z2` (offish)
-* [Steam Trade Offer](https://steamcommunity.com/tradeoffer/new/?partner=293059984&token=0-l_idZR) (offish)
-* BTC (bukson): `3PRzESHsTVkCFK7osjwFGQLZjSf7qXP1Ta` (bukson)
-* [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XC8BMJ8QRD9ZY) (bukson)
+* BTC: `bc1q9gmh5x2g9s0pw3282a5ypr6ms8qvuxh3fd7afh`
+* [Steam Trade Offer](https://steamcommunity.com/tradeoffer/new/?partner=293059984&token=0-l_idZR)
 
 ## Installation
 ```bash
@@ -24,40 +22,16 @@ pip install steampie
 pip install --upgrade steampie
 ```
 
-## Differences from `steampy`
-<!-- * Added functionality for adding/removing friends -->
-* Removed market functionality due to Steam having strict ToS regarding market automation
-* Uses [ruff](https://github.com/astral-sh/ruff) for formatting and linting
-* Uses [pytest](https://pytest.org/) for unit tests
-
-<!-- ## Usage
-
-
-## Examples
-
-
-## Developing -->
-
-
 ### Tests
 ```bash
 # steampie/
-pytest
-```
-
-### Building documentation
-```bash
-# steampie/
-cd docs/
-make clean
-make html
+pytest -v
 ```
 
 ## License
 MIT License
 
-Copyright (c) 2016 [Michał Bukowski](mailto:gigibukson@gmail.com) <br>
-Copyright (c) 2024 offish ([confern](https://steamcommunity.com/id/confern))
+Copyright (c) 2026 offish ([confern](https://steamcommunity.com/id/confern))
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
