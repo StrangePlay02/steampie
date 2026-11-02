@@ -49,24 +49,22 @@ CASES = [
     ),
 ]
 
-parametrize_cases = pytest.mark.parametrize("case", CASES, ids=[c.account_id for c in CASES])
 
-
-@parametrize_cases
+@pytest.mark.parametrize("case", CASES, ids=[c.account_id for c in CASES])
 def test_get_account_id_from_trade_url(case: TradeUrlCase) -> None:
     assert get_account_id_from_trade_url(case.trade_url) == case.account_id
 
 
-@parametrize_cases
+@pytest.mark.parametrize("case", CASES, ids=[c.account_id for c in CASES])
 def test_get_steam_id_from_trade_url(case: TradeUrlCase) -> None:
     assert get_steam_id_from_trade_url(case.trade_url) == case.steam_id
 
 
-@parametrize_cases
+@pytest.mark.parametrize("case", CASES, ids=[c.account_id for c in CASES])
 def test_has_token_in_trade_url(case: TradeUrlCase) -> None:
     assert has_token_in_trade_url(case.trade_url) is (case.token is not None)
 
 
-@parametrize_cases
+@pytest.mark.parametrize("case", CASES, ids=[c.account_id for c in CASES])
 def test_get_token_from_trade_url(case: TradeUrlCase) -> None:
     assert get_token_from_trade_url(case.trade_url) == case.token

@@ -60,8 +60,7 @@ class Description(TypedDict):
     sealed_type: int
 
 
-class Item(Asset, Description):
-    pass
+class Item(Asset, Description): ...
 
 
 class InventoryResponse(TypedDict):
