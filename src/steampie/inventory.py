@@ -40,7 +40,12 @@ class Inventory:
 
 
 class AsyncInventory(Inventory):
-    def __init__(self, session: ClientSession, provider_name="steamcommunity", api_key=None):
+    def __init__(
+        self,
+        session: ClientSession,
+        provider_name: str = "steamcommunity",
+        api_key: str | None = None,
+    ) -> None:
         self.session = session
         self.provider = self._get_provider(provider_name, api_key)
 
