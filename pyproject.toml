@@ -7,7 +7,7 @@ name = "steampie"
 authors = [
   { name="offish", email="overutilization@gmail.com" },
 ]
-description = "Interact with Steam using Python 3"
+description = "steampie is a Python library with utilities and tools for interacting with Steam."
 readme = "README.md"
 requires-python = ">=3.12"
 keywords = ["steam", "steampie", "steampy", "steamio"]
@@ -16,7 +16,7 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
-dependencies = ["rsa", "beautifulsoup4", "requests"]
+dependencies = []
 dynamic = ["version"]
 
 [project.urls]
