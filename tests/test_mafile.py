@@ -3,8 +3,8 @@ from typing import NamedTuple
 
 import pytest
 
-from src.steampie import MaFileData, get_mafile_data
-from src.steampie.mafile import has_manifest_file, is_mafile_unencrypted
+from src.steampie import get_mafile_data, is_mafile_unencrypted
+from src.steampie.mafile import has_manifest_file
 
 MOCK_PATH = Path(__file__).parent / "mock"
 
@@ -83,8 +83,8 @@ def test_is_mafile_unencrypted(file_name: str, expected: bool):
 def test_get_mafile_data(file_name: str, expected: Expected):
     result = get_mafile_data(MOCK_PATH / file_name, expected.passphrase)
 
-    assert isinstance(result, MaFileData)
-    assert result.steam_id == expected.steam_id
-    assert result.username == expected.username
-    assert result.identity_secret == expected.identity_secret
-    assert result.shared_secret == expected.shared_secret
+    assert isinstance(result, dict)
+    assert result["steam_id"] == expected.steam_id
+    assert result["username"] == expected.username
+    assert result["identity_secret"] == expected.identity_secret
+    assert result["shared_secret"] == expected.shared_secret

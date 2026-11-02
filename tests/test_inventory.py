@@ -37,19 +37,9 @@ def test_steamapis_inventory_provider() -> None:
     assert inventory.provider.api_key == "api_key"
 
 
-# def test_steamcommunity_inventory_fetch() -> None:
-#     provider = Inventory("steamcommunity")
-#     inventory = provider.fetch("76561198253325712")
-
-#     breakpoint()
-
-#     assert "assets" in inventory
-#     assert "descriptions" in inventory
-
-
-def test_express_load_inventory_fetch() -> None:
+def test_invalid_express_load_inventory_fetch() -> None:
     provider = Inventory("expressload", "abc123")
     response = provider.fetch(76561198253325712)
-    error_code = response.get("error", {}).get("code")
 
-    assert error_code == "invalid_api_key"
+    assert not response["success"]
+    assert "invalid_api_key" in response["message"]

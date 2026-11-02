@@ -1,9 +1,7 @@
 import base64
 import json
 import os
-from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
 
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import hashes
@@ -11,6 +9,7 @@ from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 
 from .exceptions import EncryptionError
+from .types import MaFile, MaFileSummary
 from .utils import get_json
 
 PBKDF2_ITERATIONS = 50000
@@ -19,14 +18,6 @@ KEY_SIZE_BYTES = 32
 IV_LENGTH = 16
 
 backend = default_backend()
-
-
-@dataclass
-class MaFileData:
-    steam_id: str
-    username: str
-    identity_secret: str
-    shared_secret: str
 
 
 def get_random_salt() -> bytes:
@@ -65,6 +56,14 @@ def decrypt_data(code: str, salt_b64: str, iv_b64: str, encrypted_data_b64: str 
         return None
 
 
+def get_encryption_values(manifest: Path, mafile: Path) -> dict | None:
+    manifest_data = get_json(manifest)
+
+    for entry in manifest_data["entries"]:
+        if entry["filename"] == mafile.name:
+            return entry
+
+
 def has_manifest_file(mafile: Path) -> bool:
     for item in mafile.parent.glob("*"):
         if item.name != "manifest.json":
@@ -86,15 +85,7 @@ def is_mafile_unencrypted(mafile: Path) -> bool:
     return "account_name" in content
 
 
-def get_encryption_values(manifest: Path, mafile: Path) -> dict | None:
-    manifest_data = get_json(manifest)
-
-    for entry in manifest_data["entries"]:
-        if entry["filename"] == mafile.name:
-            return entry
-
-
-def get_decrypted_data(mafile: Path, code: str | None) -> Any:
+def get_mafile_decrypted_data(mafile: Path, code: str | None) -> MaFile:
     if not has_manifest_file(mafile):
         raise EncryptionError("maFile is encrypted and no manifest.json was found!")
 
@@ -119,17 +110,19 @@ def get_decrypted_data(mafile: Path, code: str | None) -> Any:
     return json.loads(decrypted_text)
 
 
-def get_mafile_data(mafile: Path, code: str | None = None) -> MaFileData:
-    content = None
-
+def get_mafile_data_raw(mafile: Path, code: str | None = None) -> MaFile:
     if is_mafile_unencrypted(mafile):
-        content = get_json(mafile)
-    else:
-        content = get_decrypted_data(mafile, code)
+        return get_json(mafile)
 
-    return MaFileData(
-        content["Session"]["SteamID"],
-        content["account_name"],
-        content["identity_secret"],
-        content["shared_secret"],
-    )
+    return get_mafile_decrypted_data(mafile, code)
+
+
+def get_mafile_data(mafile: Path, code: str | None = None) -> MaFileSummary:
+    data = get_mafile_data_raw(mafile, code)
+
+    return {
+        "steam_id": data["Session"]["SteamID"],
+        "username": data["account_name"],
+        "identity_secret": data["identity_secret"],
+        "shared_secret": data["shared_secret"],
+    }
