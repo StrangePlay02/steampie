@@ -1,7 +1,7 @@
 # flake8: noqa: F401
 __title__ = "steampie"
 __author__ = "offish"
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 __license__ = "MIT"
 
 from .exceptions import EncryptionError, SteamPieError
