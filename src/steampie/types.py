@@ -42,7 +42,7 @@ class Description(TypedDict):
     background_color: str
     icon_url: str
     icon_url_large: str
-    description: list[DescriptionValue]
+    descriptions: list[DescriptionValue]
     tradable: int
     actions: list[Action]
     name: str
