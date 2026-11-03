@@ -7,7 +7,9 @@ class ExpressLoad(Provider):
     def get_headers(self, steam_id: str | int | None = None) -> dict[str, Any]:
         return {"X-API-Key": self.api_key, "User-Agent": "tf2-express"}
 
-    def get_url_and_params(self, steam_id: str | int, app_id: int | str, context_id: int | str) -> tuple[str, dict]:
+    def get_url_and_params(
+        self, steam_id: str | int, app_id: int | str, context_id: int | str, cursor: str | None = None
+    ) -> tuple[str, dict]:
         url = f"https://api.express-load.com/inventory/{steam_id}/{app_id}/{context_id}"
         params = {}
 

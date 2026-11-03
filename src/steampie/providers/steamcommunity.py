@@ -28,8 +28,12 @@ class SteamCommunity(Provider):
             ),
         }
 
-    def get_url_and_params(self, steam_id: str | int, app_id: int | str, context_id: int | str) -> tuple[str, dict]:
+    def get_url_and_params(
+        self, steam_id: str | int, app_id: int | str, context_id: int | str, cursor: str | None = None
+    ) -> tuple[str, dict[str, str | int]]:
         url = f"https://steamcommunity.com/inventory/{steam_id}/{app_id}/{context_id}"
-        params = {"l": "english", "count": 2500}
+        params: dict[str, str | int] = {"l": "english", "count": 2500}
+        if cursor is not None:
+            params["start_assetid"] = cursor
 
         return url, params
