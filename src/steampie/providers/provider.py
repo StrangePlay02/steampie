@@ -6,7 +6,7 @@ class Provider(ABC):
     def __init__(self, api_key: str = "") -> None:
         self.api_key = api_key
 
-    def get_headers() -> dict[str, Any]:
+    def get_headers(self, steam_id: str | int | None = None) -> dict[str, Any]:
         return {}
 
     @abstractmethod

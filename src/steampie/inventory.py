@@ -30,7 +30,7 @@ class Inventory:
         self, steam_id: int | str, app_id: int | str = 440, context_id: int | str = 2
     ) -> InventoryResponse | FailedResponse:
         url, params = self.provider.get_url_and_params(steam_id, app_id, context_id)
-        headers = self.provider.get_headers()
+        headers = self.provider.get_headers(steam_id)
         response = requests.get(url, params=params, headers=headers)
 
         if response.ok:
@@ -53,7 +53,7 @@ class AsyncInventory(Inventory):
         self, steam_id: int | str, app_id: int | str = 440, context_id: int | str = 2
     ) -> InventoryResponse | FailedResponse:
         url, params = self.provider.get_url_and_params(steam_id, app_id, context_id)
-        headers = self.provider.get_headers()
+        headers = self.provider.get_headers(steam_id)
 
         async with self.session.get(url, params=params, headers=headers) as resp:
             if not resp.ok:
